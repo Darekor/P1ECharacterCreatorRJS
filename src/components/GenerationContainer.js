@@ -1,6 +1,8 @@
 import React from 'react'
 import {useState} from "react"
 
+import { Container,Button, Row,Col } from "react-bootstrap";
+
 import PointBuyCalculator from './PointBuy/PointBuyCalculator'
 import RaceChoice from './RaceChoice/RaceChoice'
 import ClassChoice from './ClassChoice/ClassChoice'
@@ -23,19 +25,37 @@ function GenerationContainer({
             break;
         case 2:
             current = <ClassChoice classes={classes} classChoice={classChoice}/>
-            break;  
+            break;
+        case 3:
+            current = <h3>Pick your skills</h3>
+            break; 
+        case 4:
+            current = <h3>Pick your feats</h3>
+            break;   
+        case 5:
+            current = <h3>Buy equipment</h3>
+            break;
+        case 6:
+            current = <h3>Finishing details</h3>
+            break;                                                
         default:
             current = <h3>There is nothing here</h3>
             break;
     }
 
     return (
-    <div style={{float:"left", backgroundColor:"#ccc", padding:"25px", width:"50%", height:"350px", position:'relative' }}>
-        <p>Current stage:{stage}</p>
-        {current}
-        <button style={{position:"absolute", bottom:0}} onClick={() => setStage(stage-1)}>Previous</button>
-        <button style={{position:"absolute", bottom:0,right:0}} onClick={() => setStage(stage+1)}>Next</button>
-    </div>
+    <Container className="h-100">
+        <Row>
+            <p>Counting states</p>
+        </Row>
+        <div className="d-flex flex-grow-1">
+            {current}
+        </div>
+        <Row>
+            <Button disabled={stage<=0} onClick={() => setStage(stage-1)}>Previous</Button>
+            <Button className='float-end' disabled={stage>=6}onClick={() => setStage(stage+1)}>Next</Button>  
+        </Row>
+    </Container>
     )
 }
 

@@ -1,3 +1,4 @@
+import { Form } from "react-bootstrap"
 
 const PointBuyRow = ({attribute, onChange}) => {
     
@@ -7,7 +8,8 @@ const PointBuyRow = ({attribute, onChange}) => {
             {attribute.name}
         </td>
         <td>
-            <input
+            <Form>
+            <Form.Control
             onInput={e => onChange(attribute.name,e.target.value)}
             onKeyDown = {(e)=>{e.preventDefault()}}
             defaultValue = {10}
@@ -15,7 +17,8 @@ const PointBuyRow = ({attribute, onChange}) => {
             min = {7}
             max = {18}
             >
-            </input>
+            </Form.Control>
+            </Form>
         </td>
         <td>
             {Math.floor((attribute.base - 10)/2)}

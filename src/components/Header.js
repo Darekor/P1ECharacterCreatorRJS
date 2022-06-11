@@ -1,8 +1,10 @@
 function Header() {
   return (
-    <h1>
+    <header className="App-header border">
+      <h1>
         This is character creator
-    </h1>
+      </h1>
+    </header>
   )
 }
 
