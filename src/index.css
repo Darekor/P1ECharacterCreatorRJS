@@ -7,8 +7,8 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-html,body{
-  height:100%;
+.previewRow{
+  font-size: 12px;
 }
 
 code {

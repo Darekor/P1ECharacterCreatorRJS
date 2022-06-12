@@ -141,7 +141,7 @@ function App() {
       </Row>
 
       <Row style={{height:"90%"}} className="">
-        <Col md={9} >
+        <Col md={9} className="h-100 d-flex flex-column">
         <GenerationContainer 
           attributes = {attributes} onChange = {changeBaseAttribute}
           races = {races} raceChoice = {setChosenRace}

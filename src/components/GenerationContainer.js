@@ -1,7 +1,7 @@
 import React from 'react'
 import {useState} from "react"
 
-import { Container,Button, Row,Col } from "react-bootstrap";
+import { Container,Button, Row,Col, Pagination } from "react-bootstrap";
 
 import PointBuyCalculator from './PointBuy/PointBuyCalculator'
 import RaceChoice from './RaceChoice/RaceChoice'
@@ -43,19 +43,34 @@ function GenerationContainer({
             break;
     }
 
+    let pages=[];
+    for (let num=0; num<=6;num++){
+        pages.push(
+            <Pagination.Item key={num} active={num==stage} onClick={()=>(setStage(num))}>
+                {num}
+            </Pagination.Item>
+        )
+    }
+
     return (
-    <Container className="h-100">
+    <>
         <Row>
-            <p>Counting states</p>
+            <Pagination>
+                {pages}
+            </Pagination>
         </Row>
-        <div className="d-flex flex-grow-1">
+        <Row className="flex-grow-1 overflow-auto">
             {current}
-        </div>
-        <Row>
-            <Button disabled={stage<=0} onClick={() => setStage(stage-1)}>Previous</Button>
-            <Button className='float-end' disabled={stage>=6}onClick={() => setStage(stage+1)}>Next</Button>  
         </Row>
-    </Container>
+        <Row>
+            <Col>
+                <Button disabled={stage<=0} onClick={() => setStage(stage-1)}>Previous</Button>
+            </Col>
+            <Col>
+                <Button className='float-end' disabled={stage>=6}onClick={() => setStage(stage+1)}>Next</Button>
+            </Col>
+        </Row>
+    </>
     )
 }
 

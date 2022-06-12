@@ -4,7 +4,7 @@ import { Table } from "react-bootstrap"
 
 const PointBuyCalculator = ({attributes,onChange}) => {
     return (
-    <Table hover>
+    <Table hover style={{maxHeight:"450px"}}>
         <thead>
             <tr>
             <th>
