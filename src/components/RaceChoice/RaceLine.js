@@ -11,7 +11,7 @@ function RaceLine({race,raceChoice}) {
   }
 
   return (
-    <ListGroupItem action onClick={()=>getRaceData(race,raceChoice)}>{race}</ListGroupItem>
+    <ListGroupItem action key={race.name} onClick={()=>raceChoice(race)}>{race.name}</ListGroupItem>
   )
 }
 

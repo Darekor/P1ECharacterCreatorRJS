@@ -9,7 +9,7 @@ function ClassLine({pclass, pclassChoice}) {
   }
   
   return (
-    <ListGroupItem action onClick={()=>getClassData(pclass)}>{pclass}
+    <ListGroupItem action onClick={()=>pclassChoice(pclass)}>{pclass.name}
     </ListGroupItem>
   )
 }

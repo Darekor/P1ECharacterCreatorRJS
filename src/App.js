@@ -85,16 +85,16 @@ function App() {
     }
     ))
   }
-  const [races, setRaces] = useState()
+  const [races, setRaces] = useState([])
   const getRacesData = async() =>{
-    const response = await fetch('https://ktor-p1eapi.herokuapp.com/raceReference')
+    const response = await fetch('https://ktor-p1eapi.herokuapp.com/race')
     .then(response => response.json());
     setRaces(response);
   }
 
-  const[classes,setClasses] = useState()
+  const[classes,setClasses] = useState([])
   const getClassesData = async() =>{
-    const response = await fetch('https://ktor-p1eapi.herokuapp.com/classReference')
+    const response = await fetch('https://ktor-p1eapi.herokuapp.com/class')
     .then(response => response.json());
     setClasses(response);
   }
@@ -128,10 +128,32 @@ function App() {
       classFeatures: []
     },
   )
+  const [chosenFeat,setChosenFeat] = useState(
+    {
+      name: "",
+      source: "",
+      sourceSite:"",
+      flavor:"",
+      prerequisites:{},
+      description:"",
+      normal:"",
+      special:"",
+      tags:"",
+      type:"UTP"
+    }
+  )
+
+  const [feats,setFeats] = useState([])
+  const getFeatsData = async()=>{
+    const response = await fetch('https://ktor-p1eapi.herokuapp.com/featReference')
+    .then(response => response.json());
+    setFeats(response);
+  }
 
   useEffect(() => {
     getRacesData();
     getClassesData();
+    //getFeatsData();
   }, []);
 
   return (
@@ -145,7 +167,8 @@ function App() {
         <GenerationContainer 
           attributes = {attributes} onChange = {changeBaseAttribute}
           races = {races} raceChoice = {setChosenRace}
-          classes = {classes} classChoice = {setChosenClass} />
+          classes = {classes} classChoice = {setChosenClass}
+          feats = {feats} featChoice={setChosenFeat}/>
         </Col>
 
         <Col md={3} >

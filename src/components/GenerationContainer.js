@@ -6,11 +6,13 @@ import { Container,Button, Row,Col, Pagination } from "react-bootstrap";
 import PointBuyCalculator from './PointBuy/PointBuyCalculator'
 import RaceChoice from './RaceChoice/RaceChoice'
 import ClassChoice from './ClassChoice/ClassChoice'
+import ChoiceWrapper from './FeatChoice/ChoiceWrapper'
 
 function GenerationContainer({
     attributes,onChange,
     races,raceChoice,
-    classes,classChoice}) {
+    classes,classChoice,
+    feats,featChoice}) {
 
     const[stage,setStage] = useState(0)
     
@@ -21,16 +23,16 @@ function GenerationContainer({
             current = <PointBuyCalculator attributes = {attributes} onChange = {onChange}/>
             break;
         case 1:
-            current = <RaceChoice races={races} raceChoice={raceChoice}/>
+            current = <ChoiceWrapper choices={races} choiceFun={raceChoice}/>
             break;
         case 2:
-            current = <ClassChoice classes={classes} classChoice={classChoice}/>
+            current = <ChoiceWrapper choices={classes} choiceFun={classChoice}/>
             break;
         case 3:
             current = <h3>Pick your skills</h3>
             break; 
         case 4:
-            current = <h3>Pick your feats</h3>
+            current = <ChoiceWrapper choices={feats} choiceFun={featChoice}></ChoiceWrapper>
             break;   
         case 5:
             current = <h3>Buy equipment</h3>
