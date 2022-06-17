@@ -145,7 +145,7 @@ function App() {
 
   const [feats,setFeats] = useState([])
   const getFeatsData = async()=>{
-    const response = await fetch('https://ktor-p1eapi.herokuapp.com/featReference')
+    const response = await fetch('https://ktor-p1eapi.herokuapp.com/feat')
     .then(response => response.json());
     setFeats(response);
   }
@@ -153,7 +153,7 @@ function App() {
   useEffect(() => {
     getRacesData();
     getClassesData();
-    //getFeatsData();
+    getFeatsData();
   }, []);
 
   return (

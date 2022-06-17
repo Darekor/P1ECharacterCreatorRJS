@@ -1,12 +1,10 @@
 import React from 'react'
 import {useState} from "react"
-
-import { Container,Button, Row,Col, Pagination } from "react-bootstrap";
+import {Button, Row,Col, Pagination } from "react-bootstrap";
 
 import PointBuyCalculator from './PointBuy/PointBuyCalculator'
-import RaceChoice from './RaceChoice/RaceChoice'
-import ClassChoice from './ClassChoice/ClassChoice'
-import ChoiceWrapper from './FeatChoice/ChoiceWrapper'
+import ChoiceWrapper from './ChoiceContainers/ChoiceWrapper'
+import FinishingPage from './FinishingPage';
 
 function GenerationContainer({
     attributes,onChange,
@@ -32,13 +30,13 @@ function GenerationContainer({
             current = <h3>Pick your skills</h3>
             break; 
         case 4:
-            current = <ChoiceWrapper choices={feats} choiceFun={featChoice}></ChoiceWrapper>
+            //current = <ChoiceWrapper choices={feats} choiceFun={featChoice}></ChoiceWrapper>
             break;   
         case 5:
             current = <h3>Buy equipment</h3>
             break;
         case 6:
-            current = <h3>Finishing details</h3>
+            current = <FinishingPage/>
             break;                                                
         default:
             current = <h3>There is nothing here</h3>
@@ -48,7 +46,7 @@ function GenerationContainer({
     let pages=[];
     for (let num=0; num<=6;num++){
         pages.push(
-            <Pagination.Item key={num} active={num==stage} onClick={()=>(setStage(num))}>
+            <Pagination.Item key={num} active={num===stage} onClick={()=>(setStage(num))}>
                 {num}
             </Pagination.Item>
         )
