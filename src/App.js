@@ -28,7 +28,218 @@ const evaluatePrice = (int)=>{
   }
 }
 
-
+const initialSkills = [
+  {
+    name:"Acrobatics",
+    ranks:0,
+    attribute:"Dexterity",
+    class:false
+  },
+  {
+    name:"Disable Device",
+    ranks:0,
+    attribute:"Dexterity",
+    class:false
+  },
+  {
+    name:"Escape Artist",
+    ranks:0,
+    attribute:"Dexterity",
+    class:false
+  },
+  {
+    name:"Fly",
+    ranks:0,
+    attribute:"Dexterity",
+    class:false
+  },
+  {
+    name:"Ride",
+    ranks:0,
+    attribute:"Dexterity",
+    class:false
+  },
+  {
+    name:"Sleight of Hand",
+    ranks:0,
+    attribute:"Dexterity",
+    class:false
+  },
+  {
+    name:"Stealth",
+    ranks:0,
+    attribute:"Dexterity",
+    class:false
+  },
+  {
+    name:"Appraise",
+    ranks:0,
+    attribute:"Intelligence",
+    class:false
+  },
+  {
+    name:"Craft",
+    ranks:0,
+    attribute:"Intelligence",
+    class:false
+  },
+  {
+    name:"Knowledge (arcana)",
+    ranks:0,
+    attribute:"Intelligence",
+    class:false
+  },
+  {
+    name:"Knowledge (dungeoneering)",
+    ranks:0,
+    attribute:"Intelligence",
+    class:false
+  },
+  {
+    name:"Knowledge (engineering)",
+    ranks:0,
+    attribute:"Intelligence",
+    class:false
+  },
+  {
+    name:"Knowledge (geography)",
+    ranks:0,
+    attribute:"Intelligence",
+    class:false
+  },
+  {
+    name:"Knowledge (history)",
+    ranks:0,
+    attribute:"Intelligence",
+    class:false
+  },
+  {
+    name:"Knowledge (local)",
+    ranks:0,
+    attribute:"Intelligence",
+    class:false
+  },
+  {
+    name:"Knowledge (nature)",
+    ranks:0,
+    attribute:"Intelligence",
+    class:false
+  },
+  {
+    name:"Knowledge (nobility)",
+    ranks:0,
+    attribute:"Intelligence",
+    class:false
+  },
+  {
+    name:"Knowledge (planes)",
+    ranks:0,
+    attribute:"Intelligence",
+    class:false
+  },
+  {
+    name:"Knowledge (religion)",
+    ranks:0,
+    attribute:"Intelligence",
+    class:false
+  },
+  {
+    name:"Linguistics",
+    ranks:0,
+    attribute:"Intelligence",
+    class:false
+  },
+  {
+    name:"Spellcraft",
+    ranks:0,
+    attribute:"Intelligence",
+    class:false
+  },
+  {
+    name:"Bluff",
+    ranks:0,
+    attribute:"Charisma",
+    class:false
+  },
+  {
+    name:"Diplomacy",
+    ranks:0,
+    attribute:"Charisma",
+    class:false
+  },
+  {
+    name:"Disguise",
+    ranks:0,
+    attribute:"Charisma",
+    class:false
+  },
+  {
+    name:"Handle Animal",
+    ranks:0,
+    attribute:"Charisma",
+    class:false
+  },
+  {
+    name:"Intimidate",
+    ranks:0,
+    attribute:"Charisma",
+    class:false
+  },
+  {
+    name:"Perform",
+    ranks:0,
+    attribute:"Charisma",
+    class:false
+  },
+  {
+    name:"Use Magic Device",
+    ranks:0,
+    attribute:"Charisma",
+    class:false
+  },
+  {
+    name:"Climb",
+    ranks:0,
+    attribute:"Strength",
+    class:false
+  },
+  {
+    name:"Swim",
+    ranks:0,
+    attribute:"Strength",
+    class:false
+  },
+  {
+    name:"Heal",
+    ranks:0,
+    attribute:"Wisdom",
+    class:false
+  },
+  {
+    name:"Perception",
+    ranks:0,
+    attribute:"Wisdom",
+    class:false
+  },
+  {
+    name:"Profession",
+    ranks:0,
+    attribute:"Wisdom",
+    class:false
+  },
+  {
+    name:"Sense Motive",
+    ranks:0,
+    attribute:"Wisdom",
+    class:false
+  },
+  {
+    name:"Survival",
+    ranks:0,
+    attribute:"Wisdom",
+    class:false
+  }
+]
 
 function App() {
 
@@ -81,7 +292,8 @@ function App() {
           res.bonus = Math.floor((res.base-10)/2)
           return res
         }
-      else return attribute
+      else 
+        return attribute
     }
     ))
   }
@@ -98,6 +310,8 @@ function App() {
     .then(response => response.json());
     setClasses(response);
   }
+
+  const[skills,setSkills] = useState(initialSkills)
 
   const [chosenRace, setChosenRace] = useState(
     {
@@ -143,6 +357,48 @@ function App() {
     }
   )
 
+  const changeSkill = (name, newval,pclass) =>{
+    setSkills(skills.map((skill)=>{
+      if (skill.name===name)
+        {
+          let res = skill
+          res.ranks = newval
+          res.class = pclass
+          return res
+        }
+      else return skill
+    }
+    ))
+  }
+
+  const setClass = (pclass) =>{
+    setChosenClass(pclass)
+    setSkills(skills.map((sk)=>
+      {
+        let res = sk
+        res.ranks = 0
+        res.class = false
+        return res}
+    ))
+    pclass.skills.forEach(element =>
+      addSkill(element)
+    )
+  } 
+
+  const addSkill = (skill) =>{
+    setSkills(skills.map((sk)=>
+    {
+      if (sk.name === skill){
+        let res = sk
+        res.class = true
+        return res
+      }
+      else 
+        return sk
+    }
+    ))
+  }
+
   const [feats,setFeats] = useState([])
   const getFeatsData = async()=>{
     const response = await fetch('https://ktor-p1eapi.herokuapp.com/feat')
@@ -167,8 +423,10 @@ function App() {
         <GenerationContainer 
           attributes = {attributes} onChange = {changeBaseAttribute}
           races = {races} raceChoice = {setChosenRace}
-          classes = {classes} classChoice = {setChosenClass}
-          feats = {feats} featChoice={setChosenFeat}/>
+          classes = {classes} classChoice = {setClass}
+          feats = {feats} featChoice={setChosenFeat}
+          skills = {skills} skillChange={changeSkill}
+          race={chosenRace} pclass={chosenClass} feat={chosenFeat}/>
         </Col>
 
         <Col md={3} >

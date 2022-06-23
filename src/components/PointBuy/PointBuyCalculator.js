@@ -13,10 +13,10 @@ const PointBuyCalculator = ({attributes,onChange}) => {
             <th>
                 Value
             </th>
-            <th>
+            <th style={{textAlign:"center"}}>
                 Bonus
             </th>
-            <th>
+            <th style={{textAlign:"center"}}>
                 Point cost
             </th>
             </tr>

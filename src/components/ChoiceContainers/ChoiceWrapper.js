@@ -1,15 +1,17 @@
 import React from 'react'
 
-import { ListGroup,ListGroupItem} from 'react-bootstrap'
+import { Row,ListGroup,ListGroupItem} from 'react-bootstrap'
 
-function ChoiceWrapper({choices,choiceFun}) {
+function ChoiceWrapper({description,choices,choiceFun}) {
   return (
     <>
-      <h4>Choose</h4>
+    <h4>Choose a {description}</h4>
+    <Row className="flex-grow-1 overflow-auto">
       <ListGroup>
         {choices.map((choice)=>
         (<ListGroupItem action key={choice.name} onClick={()=>choiceFun(choice)}>{choice.name}</ListGroupItem>))}
         </ListGroup>
+    </Row>
     </>
   )
 }

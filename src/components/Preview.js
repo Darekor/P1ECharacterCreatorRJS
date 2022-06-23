@@ -31,7 +31,7 @@ function Preview({attributes,race,pclass})
   <Container className="border overflow-auto" style={{height:"300px"}}>
     
     <Row className="previewRow">
-      <h4>Name, the {pclass.name}</h4>
+      <h4>Hero, the {pclass.name}</h4>
       <h5>{race.name}</h5>
     </Row>
 
@@ -65,7 +65,7 @@ function Preview({attributes,race,pclass})
       <Col>
       <p>Hp: {Math.max(pclass.hitDice + attributes[2].bonus,1)}</p>
       <p>CMD: {10+attributes[1].bonus+attributes[0].bonus}</p>
-      <p>Saves: {evalBonus(1,pclass.saves[0])+(pclass.saves[0]==="TH"?2:0)+attributes[2].bonus} {evalBonus(1,pclass.saves[1])+(pclass.saves[1]==="TH"?2:0)+attributes[1].bonus} {evalBonus(1,pclass.saves[2])+(pclass.saves[2]==="TH"?2:0)+attributes[4].bonus}</p>
+      <p>Saves: {evalBonus(1,pclass.saves[0])+(pclass.saves[0]==="HF"?2:0)+attributes[2].bonus} {evalBonus(1,pclass.saves[1])+(pclass.saves[1]==="TH"?2:0)+attributes[1].bonus} {evalBonus(1,pclass.saves[2])+(pclass.saves[2]==="TH"?2:0)+attributes[4].bonus}</p>
       </Col>
       <Col>
       <p>Ac: {10+attributes[1].bonus}</p>
@@ -80,7 +80,6 @@ function Preview({attributes,race,pclass})
       </h5>
       <p>Initiative: {formattedInt(attributes[1].bonus)}</p>
       <p>Skillpoints: {Math.max(pclass.skillPoints+attributes[3].bonus,1)}</p>
-      <p>Speed:0</p>
     </Row>
 
     <Row className="previewRow">
